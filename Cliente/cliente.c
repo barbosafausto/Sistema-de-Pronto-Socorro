@@ -123,9 +123,8 @@ int chamar_paciente(FILA* f) {
 			int id = paciente_get_id(p);
 
 			//Precisamos desalocar, porque agora o paciente não está mais na fila
-			free(p);
-			p = NULL;
-
+			paciente_apagar(&p);
+			
 			return(id);
 		}
 		else {
