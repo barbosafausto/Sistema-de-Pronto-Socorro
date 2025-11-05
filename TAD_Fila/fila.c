@@ -139,8 +139,7 @@ bool fila_salvar(FILA** fila) {
 			fprintf(arquivo, "%d\n", paciente_get_id(p));
 			fprintf(arquivo, "%s\n", paciente_get_nome(p));
 			
-			free(p);
-			p = NULL;
+			paciente_apagar(&p);
 		}
 		//Fechamento do arquivo.
 		fclose(arquivo);
