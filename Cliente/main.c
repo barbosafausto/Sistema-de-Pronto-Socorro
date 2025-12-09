@@ -61,7 +61,7 @@ int main() {
 					getchar();
 				}
 
-				registrar_obito(r, id);
+				registrar_obito(r, f, id);
 				break;
 			case 3:
 				puts("--- Adicionar Procedimento ao Histórico Médico ---\n");
@@ -93,7 +93,9 @@ int main() {
 				puts("--- Chamar Paciente para Atendimento ---\n");
 
 				id = chamar_paciente(f);
-				printf("Paciente de id %d foi chamado.\n", id);
+
+				if (id == -1) printf("Nenhum paciente foi chamado.\n");
+				else printf("Paciente de id %d foi chamado.\n", id);
 
 				break;
 			case 6:

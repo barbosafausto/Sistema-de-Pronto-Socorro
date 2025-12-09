@@ -15,7 +15,7 @@
     bool registro_cheio(REGISTRO* r); //Verifica se está cheio
 
     bool registro_inserir(REGISTRO* r, PACIENTE* p, HISTOR *h); //Insere um nó
-    bool registro_apagar(REGISTRO* r, int id); //Apaga um nó
+    bool registro_apagar(REGISTRO* r, int id, bool salvar); //Apaga um nó
 
     void registro_listar(REGISTRO* r); //Printa todos os pacientes
 

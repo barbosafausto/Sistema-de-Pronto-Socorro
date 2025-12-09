@@ -18,7 +18,7 @@
     bool registrar_paciente(REGISTRO* r, FILA* f, char* paciente, int id);
 
     //Remover paciente do registro
-    bool registrar_obito(REGISTRO* r, int id);
+    bool registrar_obito(REGISTRO* r, FILA* f, int id);
 
     //Adicionar procedimento na pilha de procedimentos do paciente
     bool adicionar_procedimento(REGISTRO* r, int id, char* proced);

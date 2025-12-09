@@ -97,7 +97,7 @@ bool registro_inserir(REGISTRO* r, PACIENTE* p, HISTOR* h) {
     return false;
 }
 
-bool registro_apagar(REGISTRO* r, int id) {
+bool registro_apagar(REGISTRO* r, int id, bool salvar) {
 
     //Essa função apaga o histoŕio e o paciente (através de outras funções), depois apaga o nó em si
     if (r != NULL) {
@@ -126,11 +126,20 @@ bool registro_apagar(REGISTRO* r, int id) {
                 //Se eu estiver no último no
                 if (node->prox == NULL) r->fim = node->ant; //Ajusto o fim para o anterior
                 
+                int file_num = paciente_get_id(node->p);
                 //Desalocando paciente
                 paciente_apagar(&node->p);
 
                 //Desalocando o histórico do paciente
                 histor_apagar(&node->h);
+
+                //Se não estamos salvando, vamos remover o arquivo do paciente
+                if (!salvar) {
+
+                    char file[50];
+                    sprintf(file, "../TAD_Historico/proceds/%d.txt", file_num) ;
+                    remove(file);
+                }
                 
                 //Desalocando o nó atual
                 node->ant = NULL;
@@ -265,7 +274,7 @@ bool registro_salvar(REGISTRO** r) {
 
         node = node->prox;
 
-        registro_apagar(*r, paciente_get_id(p)); //Agora sim: apagamos o registro (pacientes e nós)
+        registro_apagar(*r, paciente_get_id(p), true); //Agora sim: apagamos o registro (pacientes e nós)
         //A função registro_apagar vai tentar apagar oo históricos, mas como node->h = NULL, não teremos problemas
 
         //Nós fizemos dessa forma porque, em caso de óbito, vamos precisar fazer com que a função registro_apagar apague o histórico sem salvar

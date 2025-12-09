@@ -66,10 +66,17 @@ bool registrar_paciente(REGISTRO* r, FILA* f, char* paciente, int id) {
 	return false;
 }
 
-bool registrar_obito(REGISTRO* r, int id) {
+bool registrar_obito(REGISTRO* r, FILA* f, int id) {
+
+	//Não podemos remover um paciente que está na fila.
+	if (fila_buscar(f, id)) {
+
+		fputs("Erro: não é possível registrar o óbito do paciente, pois ele está na fila.\n", stderr);
+		return false;
+	}
 
     //A função registro_apagar() já faz todas as verificações de segurança.
-    int flag = registro_apagar(r, id);
+    int flag = registro_apagar(r, id, false);
 
     if (flag) return true;
 
